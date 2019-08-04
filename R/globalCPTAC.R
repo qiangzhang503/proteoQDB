@@ -70,7 +70,7 @@ copy_mq_txt <- function(dat_dir, filelist) {
 #' Copy MaxQuant \code{.txt} files
 #'
 #' @export
-cptac_mq_pep_1 <- function(dat_dir) {
+cptac_mqpep_txt <- function(dat_dir) {
   copy_mq_txt(dat_dir,
               filelist = c("peptides_bi_1", "peptides_bi_2", "peptides_jhu_1",
                            "peptides_jhu_2", "peptides_pnnl_1", "peptides_pnnl_2"))
@@ -80,7 +80,7 @@ cptac_mq_pep_1 <- function(dat_dir) {
 #' Copy MaxQuant \code{.txt} files
 #'
 #' @export
-cptac_mq_pep_2 <- function(dat_dir) {
+cptac_mqpep_txt2 <- function(dat_dir) {
   copy_mq_txt(dat_dir,
               filelist <- c("modificationSpecificPeptides_bi_1", "modificationSpecificPeptides_bi_2",
                             "modificationSpecificPeptides_jhu_1", "modificationSpecificPeptides_jhu2",
@@ -158,7 +158,7 @@ cptac_expt_3 <- function(dat_dir) {
 #' Copy an \code{expt_smry...} file to \code{dat_dir}
 #'
 #' @export
-cptac_mq_expt_1 <- function(dat_dir) {
+cptac_mqpep_expt <- function(dat_dir) {
   copy_expt(dat_dir, "expt_smry_cptac_gl_mq.xlsx", "expt_smry.xlsx")
 }
 
@@ -195,7 +195,7 @@ copy_frac <- function(dat_dir, from = "frac_smry.xlsx", to = "frac_smry.xlsx") {
 #' Copy \code{frac_smry.xlsx}
 #'
 #' @export
-cptac_frac_1 <- function(dat_dir) {
+cptac_mqpep_frac <- function(dat_dir) {
   copy_frac(dat_dir, "frac_smry_cptac_gl.xlsx", "frac_smry.xlsx")
 }
 
@@ -251,10 +251,10 @@ copy_refseq_mm <- function(fasta_dir = "~\\proteoQ\\dbs\\refseq") {
 
 #' Copy MaxQuant \code{.txt} files
 #'
-#' \code{copy_mq_txt_b} copies the MaxQuant outputs of \code{.txt} files to a
-#' target directory.
+#' \code{copy_mq_msms} copies the MaxQuant \code{msms.txt} files to a target
+#' directory.
 #' @export
-copy_mq_txt_b <- function(dat_dir, filelist) {
+copy_mq_msms <- function(dat_dir, filelist) {
   dir.create(file.path(dat_dir), recursive = TRUE, showWarnings = FALSE)
 
   data(list = filelist, package = "proteoQDB", envir = environment())
@@ -269,10 +269,51 @@ copy_mq_txt_b <- function(dat_dir, filelist) {
 #' Copy MaxQuant \code{.txt} files
 #'
 #' @export
-cptac_mq_psm_1 <- function(dat_dir) {
-  copy_mq_txt_b(dat_dir,
-                filelist = c("msms_bi_1", "msms_bi_2", "msms_jhu_1",
-                             "msms_jhu_2", "msms_pnnl_1", "msms_pnnl_2"))
+cptac_mqpsm_txt <- function(dat_dir) {
+  copy_mq_msms(dat_dir, filelist = c("msms_bi_1", "msms_jhu_1", "msms_pnnl_1"))
+                
 }
 
+
+#' Copy an \code{expt_smry...} file to \code{dat_dir}
+#'
+#' \code{copy_expt_mq} copies a system file of \code{expt_smry...} to the target
+#' directory specified by \code{dat_dir}.
+#' @export
+copy_expt_mq <- function(dat_dir, from = "expt_smry.xlsx", to = "expt_smry.xlsx") {
+  dir.create(file.path(dat_dir), recursive = TRUE, showWarnings = FALSE)
+  
+  filepath <- system.file("extdata", from, package = "proteoQDB")
+  filepath <- gsub("/", "\\\\", filepath)
+  file.copy(from = filepath, to = file.path(dat_dir, to))
+}
+
+
+#' Copy an \code{expt_smry...} file to \code{dat_dir}
+#'
+#' @export
+cptac_mqpsm_expt <- function(dat_dir) {
+  copy_expt_mq(dat_dir, "expt_smry_mqpsm.xlsx", "expt_smry.xlsx")
+}
+
+
+#' Copy \code{frac_smry.xlsx}
+#'
+#' \code{copy_frac} copies the \code{frac_smry.xlsx} to a target directory.
+#' @export
+copy_frac_mq <- function(dat_dir, from = "frac_smry.xlsx", to = "frac_smry.xlsx") {
+  dir.create(file.path(dat_dir), recursive = TRUE, showWarnings = FALSE)
+  
+  filepath <- system.file("extdata", from, package = "proteoQDB")
+  filepath <- gsub("/", "\\\\", filepath)
+  file.copy(from = filepath, to = file.path(dat_dir, to))
+}
+
+
+#' Copy \code{frac_smry.xlsx}
+#'
+#' @export
+cptac_mqpsm_frac <- function(dat_dir) {
+  copy_frac_mq(dat_dir, "frac_smry_mqpsm.xlsx", "frac_smry.xlsx")
+}
 
