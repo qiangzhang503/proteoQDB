@@ -221,7 +221,7 @@ cptac_frac_3 <- function(dat_dir) {
 #'
 #' \code{copy_fasta} copies \code{fasta} files to a target directory.
 #' @export
-copy_fasta <- function(fasta_dir = "~\\proteoQ\\dbs\\refseq",
+copy_fasta <- function(fasta_dir = "~\\proteoQ\\dbs\\fasta\\refseq",
                        from = "refseq_hs_2013_07.fasta", to = "refseq_hs_2013_07.fasta") {
   dir.create(file.path(fasta_dir), recursive = TRUE, showWarnings = FALSE)
 
@@ -234,7 +234,7 @@ copy_fasta <- function(fasta_dir = "~\\proteoQ\\dbs\\refseq",
 #' Copy \code{refseq_hs_2013_07.fasta}
 #'
 #' @export
-copy_refseq_hs <- function(fasta_dir = "~\\proteoQ\\dbs\\refseq") {
+copy_refseq_hs <- function(fasta_dir = "~\\proteoQ\\dbs\\fasta\\refseq") {
   copy_fasta(fasta_dir, "refseq_hs_2013_07.fasta", "refseq_hs_2013_07.fasta")
 }
 
@@ -242,7 +242,7 @@ copy_refseq_hs <- function(fasta_dir = "~\\proteoQ\\dbs\\refseq") {
 #' Copy \code{refseq_mm_2013_07.fasta}
 #'
 #' @export
-copy_refseq_mm <- function(fasta_dir = "~\\proteoQ\\dbs\\refseq") {
+copy_refseq_mm <- function(fasta_dir = "~\\proteoQ\\dbs\\fasta\\refseq") {
   copy_fasta(fasta_dir, "refseq_mm_2013_07.fasta", "refseq_mm_2013_07.fasta")
 }
 
