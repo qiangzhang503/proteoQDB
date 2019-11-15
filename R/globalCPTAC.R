@@ -13,6 +13,17 @@ foo <- function () {
 }
 
 
+#' Make rda files
+foo_mq <- function () {
+  dat_dir <- "c:\\The\\MQ\\Example"
+  filelist <- c("msms_bi_1", "msms_jhu_1", "msms_pnnl_1")
+  
+  purrr::walk(filelist, ~ {
+    assign(.x, read.csv(file.path(dat_dir, paste0(.x, ".txt")), check.names = FALSE, header = TRUE, sep = "\t", comment.char = "#"))
+    save(list = .x, file = file.path(dat_dir, paste0(.x, ".rda")))
+  })
+}
+
 
 #' Copy Mascot \code{.csv} files
 #'
